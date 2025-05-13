@@ -1,0 +1,36 @@
+* parar docker compose
+docker compose down
+
+* subir docker compose
+docker compose up -d
+
+* parar compose (-v remove os volume também)
+docker compose down
+
+* listar topics
+kafka-topics.sh --list --bootstrap-server localhost:9092
+
+* acessar container do kafka
+docker exec -it kafka-kafka-1 /bin/bash
+
+* criar topic
+kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic LOJA_NOVO_PEDIDO
+
+* producers
+kafka-console-producer.sh --broker-list localhost:9092 --topic LOJA_NOVO_PEDIDO
+
+* consumers
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic LOJA_NOVO_PEDIDO --from-beginning
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic ECOMMERCE_NEW_ORDER --from-beginning
+
+* abrir editor texto
+vi config/server.properties
+
+* Para alterar o tópico, podemos usar linha de comando.
+bin/kafta-topics.sh --alter --zookeeper localhost:2181 --topic ECOMMERCE_NEW_ORDER --partitions 3
+
+* analisar os grupos de consumo
+bin/kafka-consumer-groups.sh --all-groups --bootstrap-server localhost:9092 --describe
+
+* logs
+docker logs -f kafka-kafka-1
