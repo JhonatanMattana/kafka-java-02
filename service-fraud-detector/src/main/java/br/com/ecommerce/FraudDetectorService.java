@@ -1,7 +1,6 @@
 package br.com.ecommerce;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
