@@ -59,7 +59,7 @@ public class CreateUserService {
 		insert.setString(2, email);
 		insert.execute();
 		
-		System.out.println("Usuário UUID e " + email + "adicionado.");
+		System.out.println("Usuário UUID e " + email + ", adicionado.");
 	}
 
 	private boolean isNewUser(String email) throws SQLException {
