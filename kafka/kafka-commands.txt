@@ -34,3 +34,21 @@ bin/kafka-consumer-groups.sh --all-groups --bootstrap-server localhost:9092 --de
 
 * logs
 docker logs -f kafka-kafka-1
+
+* Vamos alterar o tópico com ECOMMERCE_NEW_ORDER usando --alter, informando que desejamos 3 partições. Não tem * problema, mantivemos 3 partições. Mas desejamos um fator de replicação de 2. Então, queremos que ele replique * em outro broker. 
+bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic ECOMMERCE_NEW_ORDER --partitions 3 --replication-factor 2
+
+
+bin/kafka-topics.sh --describe --bootstrap-server localhost:9093
+bin/kafka-server-start.sh config/server.properties
+
+
+* com devops, quando distribuímos isso para 10 máquinas do cluster, talvez façamos isso de uma maneira 
+* automática, manualmente. Quando temos 2, 3, 4, 5, tudo bem, não há problema.
+### Server Basics ###
+# The id of the broker. This must be set to a unique integer for each broker.
+broker.id=0
+default.replication.factor = 2
+
+* startar (iniciar) o zookeeper.
+bin/zookeeper-server-start.sh  config/zookeeper.properties
